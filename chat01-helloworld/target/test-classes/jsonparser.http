@@ -1,0 +1,9 @@
+### 发送post请求，body中为json格式
+POST {{apiUrl}}/jsonparser/test1.do
+Content-Type: application/json; charset=UTF-8
+
+{
+"name":"follow",
+"age": 22,
+"address": "上海"
+}

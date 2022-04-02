@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--SpringMVC容器（也就是一个Spring容器）会扫描指定包中的组件，将其注册到SpringMVC容器中-->
+    <context:component-scan base-package="cc.goq.chat01"/>
+    <!--添加mvc注解驱动-->
+    <mvc:annotation-driven/>
+    <!--bean名称必须为multipartResolver-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--
+        maxUploadSizePerFile: 单个文件大小限制（unit: byte）
+        maxUploadSize: 整个请求大小限制（byte）
+        -->
+        <property name="maxUploadSizePerFile" value="#{10*1024*1024}"/>
+        <property name="maxUploadSize" value="#{100*1024*1024}"/>
+    </bean>
+</beans>

@@ -1,0 +1,46 @@
+### get请求
+GET {{apiUrl}}/get
+
+### post 提交表单
+POST {{apiUrl}}/post
+Content-Type: application/x-www-form-urlencoded
+
+name=张三&age=23
+
+### body中传递json数据
+POST {{apiUrl}}/body
+Content-Type: application/json
+
+[3,10,40]
+
+### put请求
+PUT {{apiUrl}}/put
+
+### 多文件上传接口测试
+POST {{apiUrl}}/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file1"; filename="pic_1.jpeg"
+
+<C:\Users\jijiao\Downloads\test2.png
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file2"; filename="pic_2.jpeg"
+
+<C:\Users\jijiao\Downloads\test.png
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data;name=userName
+
+tom
+--WebAppBoundary--
+
+--WebAppBoundary
+Content-Disposition: form-data;name=age
+
+23
+--WebAppBoundary--
+###
