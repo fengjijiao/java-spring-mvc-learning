@@ -1,5 +1,7 @@
 package cc.goq.chat01;
 
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -146,9 +149,56 @@ public class UploadController {
         //2.获取表单中文件数据
         System.out.println("获取表单中文件数据");
         MultiValueMap<String, MultipartFile> multiFileMap = request.getMultiFileMap();
-        //遍历
+        //3.遍历表单中元素信息
         multiFileMap.forEach((name, files) -> {
-            //
+            System.out.println(String.format("%s:%s", name, files));
         });
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/WEB-INF/view/result.jsp");
+        modelAndView.addObject("msg", "上传成功！");
+        return modelAndView;
+    }
+    @GetMapping("/upload/upload3.do")
+    public ModelAndView upload3() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/WEB-INF/view/upload/upload3.jsp");
+        return modelAndView;
+    }
+
+
+    /**
+     * 自定义对象接收多文件上传
+     *
+     */
+    @Data
+    @ToString
+    static class UserDto {
+        //姓名
+        private String name;
+        //年龄
+        private Integer age;
+        //头像
+        private MultipartFile headImg;
+        //身份证（多张图片）
+        private List<MultipartFile> idCardImg;
+    }
+
+    @PostMapping("/upload/upload4.do")
+    public ModelAndView upload4(UserDto userDto) {
+        System.out.println("姓名："+userDto.getName());
+        System.out.println("年龄："+userDto.getAge());
+        System.out.println("头像图片："+userDto.getHeadImg());
+        System.out.println("身份证（多张图片）："+Arrays.asList(userDto.getIdCardImg()));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/WEB-INF/view/result.jsp");
+        modelAndView.addObject("msg", "上传成功！");
+        return modelAndView;
+    }
+
+    @GetMapping("/upload/upload4.do")
+    public ModelAndView upload4() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/WEB-INF/view/upload/upload4.jsp");
+        return modelAndView;
     }
 }
