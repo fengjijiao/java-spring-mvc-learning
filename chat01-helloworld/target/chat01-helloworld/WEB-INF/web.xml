@@ -18,7 +18,18 @@
         </init-param>
         <!--load-on-startup：表示web容器启动的时，当前对象创建的顺序，值越小初始化越早，大于等于0-->
         <load-on-startup>0</load-on-startup>
+<!--        添加异步支持-->
+        <async-supported>true</async-supported>
     </servlet>
+    <!--    <servlet>-->
+<!--        <servlet-name>AsyncServlet1</servlet-name>-->
+<!--        <servlet-class>cc.goq.chat01.AsyncServlet1</servlet-class>-->
+<!--        <async-supported>true</async-supported>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>AsyncServlet1</servlet-name>-->
+<!--        <url-pattern>/test/async1</url-pattern>-->
+<!--    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -32,6 +43,8 @@
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+<!--        添加异步支持-->
+        <async-supported>true</async-supported>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -50,6 +63,9 @@
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+<!--        添加异步支持-->
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
     </filter-mapping>
     <!--上面这段配置主要是添加了一个过滤器，这个过滤器处理所有请求，相当于对所有请求执行下面操作，而encoding是我们设置的UTF-8-->
     <!--request.setCharacterEncoding(encoding);-->

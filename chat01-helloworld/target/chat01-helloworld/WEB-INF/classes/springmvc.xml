@@ -6,8 +6,16 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--SpringMVC容器（也就是一个Spring容器）会扫描指定包中的组件，将其注册到SpringMVC容器中-->
     <context:component-scan base-package="cc.goq.chat01"/>
+<!--    以上一行相当于或more下2行-->
+<!--    <context:component-scan base-package="cc.goq.chat01.controller"/>-->
+<!--    <context:component-scan base-package="cc.goq.chat01.handle"/>-->
     <!--添加mvc注解驱动-->
     <mvc:annotation-driven/>
+<!--    设置资源视图解析器-->
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="prefix" value="/WEB-INF/view/"/>-->
+<!--        <property name="suffix" value=".jsp"/>-->
+<!--    </bean>-->
     <!--bean名称必须为multipartResolver-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!--
@@ -17,4 +25,26 @@
         <property name="maxUploadSizePerFile" value="#{10*1024*1024}"/>
         <property name="maxUploadSize" value="#{100*1024*1024}"/>
     </bean>
+<!--    interceptors用来定义拦截器，其内部可以定义多个拦截器-->
+    <mvc:interceptors>
+<!--        mvc:interceptor标签用来定义一个拦截器-->
+        <mvc:interceptor>
+<!--            用来指定拦截器匹配的url，比如/user/**会拦截所有以/user开头的url-->
+            <mvc:mapping path="/user/**"/>
+<!--            用来指定拦截器排除的url，即这些url不会被拦截器拦截-->
+            <mvc:exclude-mapping path="/user/login"/>
+<!--            用来指定拦截器-->
+            <bean class="cc.goq.chat01.interceptor.HandlerInterceptor1"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="cc.goq.chat01.interceptor.HandlerInterceptor2"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="cc.goq.chat01.interceptor.HandlerInterceptor3"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
