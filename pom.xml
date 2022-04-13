@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>chat01-helloworld</module>
+        <module>chat02-fullannotation</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -30,14 +30,19 @@
 <!--        <servlet-name>AsyncServlet1</servlet-name>-->
 <!--        <url-pattern>/test/async1</url-pattern>-->
 <!--    </servlet-mapping>-->
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>springmvc</servlet-name>-->
+<!--        <url-pattern>*.do</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    &lt;!&ndash;所有请求（仅用于测试index.http）&ndash;&gt;-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>springmvc</servlet-name>-->
+<!--        <url-pattern>/</url-pattern>-->
+<!--    </servlet-mapping>-->
     <!--所有请求（仅用于测试index.http）-->
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/chat01/</url-pattern>
     </servlet-mapping>
     <!--添加CharacterEncodingFilter过滤器，这个类中会对request和response设置表名，解决参数乱码问题-->
     <filter>
